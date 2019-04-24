@@ -4,6 +4,11 @@
       <h1 class="fw4 tc">Expenses</h1>
     </div>
     <div class="ph4 ph5-m ph6-l">
+      <nuxt-link
+        class="f6 link dim ba bw1 ph3 pv2 mb3 dib blue"
+        to="/expenses/new"
+        >Add Expense</nuxt-link
+      >
       <ExpenseList />
     </div>
   </div>
