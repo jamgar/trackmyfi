@@ -20,6 +20,9 @@ import ExpenseList from '@/components/ExpenseList.vue'
 export default {
   components: {
     ExpenseList
+  },
+  created() {
+    this.$store.dispatch('expenses/getExpenses')
   }
 }
 </script>

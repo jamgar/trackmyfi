@@ -2,15 +2,27 @@ import { database } from '~/plugins/firebase.js'
 
 export const state = () => ({
   isEditing: false,
-  list: []
+  expenses: []
 })
 
+export const getters = {
+  getExpenseById: state => id => {
+    return state.expenses.find(expense => expense.id === id)
+  }
+}
+
 export const mutations = {
-  add(state, expense) {
+  addExpense(state, expense) {
     state.list.push({
+      id: expense.id,
       description: expense.description,
-      amount: expense.amount
+      amount: expense.amount,
+      note: expense.note,
+      createdAt: expense.createdAt
     })
+  },
+  setExpenses(state, expenses) {
+    state.expenses = expenses
   }
 }
 
@@ -20,7 +32,15 @@ export const actions = {
       .ref('expenses')
       .push(expense)
       .then(ref => {
-        commit('add', expense)
+        commit('addExpense', { id: ref.key, ...expense })
+      })
+  },
+  getExpenses({ commit }) {
+    return database
+      .ref('expenses')
+      .once('value')
+      .then(snapshot => {
+        commit('setExpenses', snapshot.val())
       })
   }
 }
