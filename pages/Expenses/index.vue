@@ -21,8 +21,9 @@ export default {
   components: {
     ExpenseList
   },
-  created() {
+  mounted() {
     this.$store.dispatch('expenses/getExpenses')
+    this.$store.dispatch('expenses/setExpense')
   }
 }
 </script>
