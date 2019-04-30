@@ -29,13 +29,13 @@
 export default {
   computed: {
     expense() {
-      return this.$store.getters['expenses/getExpense']
+      return this.$store.state.expenses.expense
     },
     path() {
       return `/expenses/edit/${this.$route.params.id}`
     }
   },
-  asyncData({ params, store }) {
+  fetch({ params, store }) {
     store.dispatch('expenses/setExpense', params.id)
   }
 }

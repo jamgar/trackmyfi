@@ -11,15 +11,6 @@ export const state = () => ({
   }
 })
 
-export const getters = {
-  getExpense: state => {
-    return state.expense
-  },
-  getExpenseById: state => id => {
-    return state.expenses.find(expense => expense.id === id)
-  }
-}
-
 export const mutations = {
   addExpense(state, expense) {
     state.expenses.push({
@@ -34,16 +25,6 @@ export const mutations = {
     state.expenses = expenses
   },
   setExpense(state, expense = {}) {
-    // let expense = {
-    //   description: '',
-    //   amount: '',
-    //   note: '',
-    //   createdAt: ''
-    // }
-
-    // if (id) {
-    //   expense = state.expenses.find(expense => expense.id === id)
-    // }
     state.expense = expense || {
       description: '',
       amount: '',
@@ -95,10 +76,6 @@ export const actions = {
   },
   async setExpense({ state, commit }, id) {
     const expense = await state.expenses.find(expense => expense.id === id)
-    console.log('id', id)
-    if (!id) {
-      console.log('no id')
-    }
     commit('setExpense', expense)
   }
 }
