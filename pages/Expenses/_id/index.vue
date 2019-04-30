@@ -13,7 +13,12 @@
       <div class="f4 bb bl br b--moon-gray mv0 pa3 dt w-100">
         <p>{{ expense.note }}</p>
       </div>
-      <nuxt-link class="f6 link dim ba bw1 ph3 pv2 mb2 dib mid-gray" :to="path"
+      <nuxt-link class="f6 link dim ba bw1 ph3 pv2 mt2 dib mid-gray" :to="path"
+        >Edit</nuxt-link
+      >
+      <nuxt-link
+        class="f6 link dim ba bw1 ph3 pv2 mb2 dib mid-gray"
+        to="/expenses"
         >Cancel</nuxt-link
       >
     </div>
@@ -24,13 +29,14 @@
 export default {
   computed: {
     expense() {
-      return this.$store.getters['expenses/getExpenseById'](
-        this.$route.params.id
-      )
+      return this.$store.getters['expenses/getExpense']
     },
     path() {
       return `/expenses/edit/${this.$route.params.id}`
     }
+  },
+  asyncData({ params, store }) {
+    store.dispatch('expenses/setExpense', params.id)
   }
 }
 </script>

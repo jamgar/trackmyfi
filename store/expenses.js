@@ -33,18 +33,23 @@ export const mutations = {
   setExpenses(state, expenses) {
     state.expenses = expenses
   },
-  setExpense(state, id) {
-    let expense = {
+  setExpense(state, expense = {}) {
+    // let expense = {
+    //   description: '',
+    //   amount: '',
+    //   note: '',
+    //   createdAt: ''
+    // }
+
+    // if (id) {
+    //   expense = state.expenses.find(expense => expense.id === id)
+    // }
+    state.expense = expense || {
       description: '',
       amount: '',
       note: '',
       createdAt: ''
     }
-
-    if (id) {
-      expense = state.expenses.find(expense => expense.id === id)
-    }
-    state.expense = Object.assign({}, state.expense, expense)
   },
   setEditing(state, editing = false) {
     state.isEditing = editing
@@ -88,7 +93,12 @@ export const actions = {
         commit('setExpenses', expenses)
       })
   },
-  setExpense({ commit }, id) {
-    commit('setExpense', id)
+  async setExpense({ state, commit }, id) {
+    const expense = await state.expenses.find(expense => expense.id === id)
+    console.log('id', id)
+    if (!id) {
+      console.log('no id')
+    }
+    commit('setExpense', expense)
   }
 }
