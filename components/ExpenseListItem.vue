@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    class="f4 fw6 bb bl br b--moon-gray mv0 pa3 dt w-100 bg-animate hover-bg-light-gray"
+    class="link f4 fw6 bb bl br b--moon-gray mv0 pa3 dt w-100 bg-animate hover-bg-light-gray dark-gray"
     :to="path"
   >
     <div class="dtc">

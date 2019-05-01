@@ -9,9 +9,7 @@
         <ExpenseListItem :expense="expense" />
       </div>
     </div>
-    <div v-else>
-      <h3>No Expenses</h3>
-    </div>
+    <div v-else>No Expenses</div>
   </div>
 </template>
 
