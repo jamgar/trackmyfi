@@ -1,6 +1,6 @@
 <template>
-  <div id="signin-form">
-    <form novalidate="true">
+  <div id="signin-form" class="pa4">
+    <form novalidate="true" class="measure center">
       <div v-if="errors.length">
         <ul>
           <li v-for="(error, idx) in errors" :key="idx">{{ error }}</li>
@@ -35,7 +35,10 @@
 </template>
 
 <script>
+import { auth } from '@/services/firebase.js'
+
 export default {
+  middleware: ['login-route'],
   data() {
     return {
       email: null,
@@ -49,6 +52,8 @@ export default {
       return re.test(email)
     },
     handleSubmit() {
+      // reset errors
+      this.errors = []
       if (!this.email || !this.validateEmail(this.email)) {
         this.errors.push('Valid email required.')
       }
@@ -56,8 +61,19 @@ export default {
         this.errors.push('Password required.')
       }
 
-      if (!this.errors.lenght) {
-        console.log('call auth/signin')
+      if (!this.errors.length) {
+        auth
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(firebaseUser => {
+            this.$store.dispatch('auth/signIn', firebaseUser)
+          })
+          .then(() => {
+            this.$router.push('/dashboard')
+          })
+          .catch(error => {
+            console.log(error.message)
+            this.errors.push(error.message)
+          })
       }
     }
   }

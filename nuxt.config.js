@@ -31,7 +31,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/firebase.js',
+    '~/plugins/fireauth.js',
     { src: '~/plugins/vuex-persist', ssr: false }
   ],
 
@@ -48,7 +48,9 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
+  // router: {
+  //   middleware: 'router-auth'
+  // },
   /*
    ** Build configuration
    */

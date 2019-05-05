@@ -4,6 +4,8 @@
     <nuxt-link to="/dashboard">Dashboard</nuxt-link>
     <nuxt-link to="/expenses">Expenses</nuxt-link>
     <nuxt-link to="/dashboard">Deposits</nuxt-link>
+    <nuxt-link to="/auth/signin">Sign In</nuxt-link>
+    <a href="#" @click="signout">Sign Out</a>
   </div>
 </template>
 
@@ -12,6 +14,10 @@ export default {
   methods: {
     closeNav() {
       document.getElementById('tmf-sidenav').style.width = '0'
+    },
+    async signout() {
+      await this.$store.dispatch('auth/signOut')
+      this.$router.push('/')
     }
   }
 }

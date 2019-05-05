@@ -1,4 +1,4 @@
-import { database } from '~/plugins/firebase.js'
+import { database } from '~/services/firebase.js'
 
 export const state = () => ({
   isEditing: false,
@@ -62,7 +62,6 @@ export const mutations = {
 
 export const actions = {
   addExpense({ commit }, expense) {
-    console.log('add expense', expense)
     return database
       .ref('expenses')
       .push(expense)
