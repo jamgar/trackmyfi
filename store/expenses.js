@@ -7,7 +7,7 @@ export const state = () => ({
     description: '',
     amount: 0,
     note: '',
-    createdAt: 0
+    createdAt: ''
   }
 })
 
@@ -36,7 +36,7 @@ export const mutations = {
       description: '',
       amount: 0,
       note: '',
-      createdAt: 0
+      createdAt: ''
     }
   },
   deleteExpense(state, id) {
@@ -73,7 +73,7 @@ export const actions = {
         commit('addExpense', { id: ref.key, ...expense })
       })
       .catch(error => {
-        console.log('Add Expense Error: ', error.message)
+        alert('Add Expense Error: ', error.message)
       })
   },
   getExpenses({ rootState, commit }) {

@@ -15,11 +15,11 @@
         type="text"
         placeholder="Amount"
       />
-      <input
+      <Datepicker
         id="date"
         v-model="createdAt"
-        class="f4 pa2 input-reset ba mb3 w-100 b--moon-gray"
-        type="text"
+        wrapper-class="mb3"
+        input-class="f4 pa2 input-reset ba w-100 b--moon-gray"
         placeholder="Date"
       />
       <textarea
@@ -46,7 +46,12 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker'
+
 export default {
+  components: {
+    Datepicker
+  },
   props: ['expense'],
   computed: {
     description: {
@@ -70,7 +75,7 @@ export default {
         return this.expense.createdAt
       },
       set(createdAt) {
-        this.$store.commit('expenses/updateCreatedAt', parseInt(createdAt))
+        this.$store.commit('expenses/updateCreatedAt', Date.parse(createdAt))
       }
     },
     note: {
