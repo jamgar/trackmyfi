@@ -62,7 +62,7 @@ export default {
         return this.expense.amount
       },
       set(amount) {
-        this.$store.commit('expenses/updateAmount', amount)
+        this.$store.commit('expenses/updateAmount', parseInt(amount))
       }
     },
     createdAt: {
@@ -70,7 +70,7 @@ export default {
         return this.expense.createdAt
       },
       set(createdAt) {
-        this.$store.commit('expenses/updateCreatedAt', createdAt)
+        this.$store.commit('expenses/updateCreatedAt', parseInt(createdAt))
       }
     },
     note: {
@@ -81,6 +81,9 @@ export default {
         this.$store.commit('expenses/updateNote', note)
       }
     }
+  },
+  created() {
+    this.$store.commit('expenses/setId', this.expense.id)
   },
   methods: {
     handleSubmit() {

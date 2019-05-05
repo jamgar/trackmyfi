@@ -5,9 +5,9 @@ export const state = () => ({
   expenses: [],
   expense: {
     description: '',
-    amount: '',
+    amount: 0,
     note: '',
-    createdAt: ''
+    createdAt: 0
   }
 })
 
@@ -34,9 +34,9 @@ export const mutations = {
   resetExpense(state) {
     state.expense = {
       description: '',
-      amount: '',
+      amount: 0,
       note: '',
-      createdAt: ''
+      createdAt: 0
     }
   },
   deleteExpense(state, id) {
@@ -45,6 +45,9 @@ export const mutations = {
   },
   setEditing(state, editing = false) {
     state.isEditing = editing
+  },
+  setId(state, id) {
+    state.id = id
   },
   updateDescription(state, description) {
     state.expense.description = description
@@ -61,18 +64,23 @@ export const mutations = {
 }
 
 export const actions = {
-  addExpense({ commit }, expense) {
+  addExpense({ rootState, state, commit }, expense) {
+    const uid = rootState.auth.user.uid
     return database
-      .ref('expenses')
+      .ref(`users/${uid}/expenses`)
       .push(expense)
       .then(ref => {
         commit('addExpense', { id: ref.key, ...expense })
       })
+      .catch(error => {
+        console.log('Add Expense Error: ', error.message)
+      })
   },
-  getExpenses({ commit }) {
+  getExpenses({ rootState, commit }) {
     const expenses = []
+    const uid = rootState.auth.user.uid
     return database
-      .ref('expenses')
+      .ref(`users/${uid}/expenses`)
       .once('value')
       .then(snapshot => {
         snapshot.forEach(childSnapshot => {
@@ -84,11 +92,18 @@ export const actions = {
         commit('setExpenses', expenses)
       })
   },
-  updateExpense({ commit }, expense) {
-    const path = `expenses/${expense.id}`
+  updateExpense({ rootState, commit }, expense) {
+    const uid = rootState.auth.user.uid
+    const path = `users/${uid}/expenses/${expense.id}`
+    const updatedExpense = {
+      description: expense.description,
+      amount: expense.amount,
+      note: expense.note,
+      createdAt: expense.createdAt
+    }
     return database
       .ref(path)
-      .update(expense)
+      .update(updatedExpense)
       .then(() => {
         commit('updateExpense', expense)
       })
@@ -100,8 +115,9 @@ export const actions = {
   resetExpense({ commit }) {
     commit('resetExpense')
   },
-  deleteExpense({ commit }, id) {
-    const path = `expenses/${id}`
+  deleteExpense({ rootState, commit }, id) {
+    const uid = rootState.auth.user.uid
+    const path = `users/${uid}/expenses/${id}`
     return database
       .ref(path)
       .remove()
