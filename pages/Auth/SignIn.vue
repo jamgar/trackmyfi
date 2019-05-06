@@ -38,7 +38,7 @@
 import { auth } from '@/services/firebase.js'
 
 export default {
-  middleware: ['login-route'],
+  middleware: 'login-route',
   data() {
     return {
       email: null,
