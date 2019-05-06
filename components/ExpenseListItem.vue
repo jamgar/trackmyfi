@@ -5,16 +5,21 @@
   >
     <div class="dtc">
       <div>{{ expense.description }}</div>
-      <span class="f6 fw4 gray">{{ expense.createdAt }}</span>
+      <span class="f6 fw4 gray">{{ formatedDate }}</span>
     </div>
     <div class="dtc tr v-mid">${{ expense.amount }}</div>
   </nuxt-link>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: ['expense'],
   computed: {
+    formatedDate() {
+      return moment(this.expense.createdAt).format('MMMM Do, YYYY')
+    },
     path() {
       return `/expenses/${this.expense.id}`
     }

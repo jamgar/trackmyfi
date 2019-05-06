@@ -6,7 +6,7 @@
       >
         <div class="dtc">
           <div>{{ expense.description }}</div>
-          <span class="f6 fw4 gray">Date: {{ expense.createdAt }}</span>
+          <span class="f6 fw4 gray">Date: {{ formattedDate }}</span>
         </div>
         <div class="dtc tr v-mid">Amount ${{ expense.amount }}</div>
       </div>
@@ -29,8 +29,13 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   computed: {
+    formattedDate() {
+      return moment(this.expense.createdAt).format('MMMM Do, YYYY')
+    },
     expense() {
       return this.$store.state.expenses.expense
     },
