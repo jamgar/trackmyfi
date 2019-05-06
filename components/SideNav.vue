@@ -1,16 +1,26 @@
 <template>
   <div id="tmf-sidenav" class="sidenav bg-dark-gray" @click="closeNav">
     <a href="#" class="close-btn" @click="closeNav">&times;</a>
-    <nuxt-link to="/dashboard">Dashboard</nuxt-link>
-    <nuxt-link to="/expenses">Expenses</nuxt-link>
-    <nuxt-link to="/dashboard">Deposits</nuxt-link>
-    <nuxt-link to="/auth/signin">Sign In</nuxt-link>
-    <a href="#" @click="signout">Sign Out</a>
+    <div v-if="isAuthenticated">
+      <nuxt-link to="/dashboard">Dashboard</nuxt-link>
+      <nuxt-link to="/expenses">Expenses</nuxt-link>
+      <nuxt-link to="/dashboard">Deposits</nuxt-link>
+      <a href="#" @click="signout">Sign Out</a>
+    </div>
+    <div v-else>
+      <nuxt-link to="/auth/signin">Sign In</nuxt-link>
+      <a href="#">Sign Up</a>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  computed: {
+    isAuthenticated() {
+      return this.$store.state.auth.isAuthenticated
+    }
+  },
   methods: {
     closeNav() {
       document.getElementById('tmf-sidenav').style.width = '0'
