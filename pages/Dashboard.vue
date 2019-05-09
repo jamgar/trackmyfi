@@ -16,6 +16,9 @@ export default {
       const expenses = this.$store.state.expenses.expenses
       return totals(expenses)
     }
+  },
+  mounted() {
+    this.$store.dispatch('expenses/getExpenses')
   }
 }
 </script>

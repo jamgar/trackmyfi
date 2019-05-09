@@ -7,7 +7,7 @@ export const state = () => ({
     description: '',
     amount: 0,
     note: '',
-    createdAt: ''
+    createdAt: 0
   }
 })
 
@@ -36,7 +36,7 @@ export const mutations = {
       description: '',
       amount: 0,
       note: '',
-      createdAt: ''
+      createdAt: 0
     }
   },
   deleteExpense(state, id) {
@@ -64,7 +64,7 @@ export const mutations = {
 }
 
 export const actions = {
-  addExpense({ rootState, state, commit }, expense) {
+  addExpense({ rootState, commit }, expense) {
     const uid = rootState.auth.user.uid
     return database
       .ref(`users/${uid}/expenses`)

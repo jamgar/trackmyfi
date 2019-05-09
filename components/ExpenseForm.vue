@@ -32,7 +32,7 @@
       ></textarea>
       <button
         class="f6 link dim ba bw1 ph3 pv2 mb2 dib dark-green"
-        @click="handleSubmit"
+        @click.prevent="handleSubmit"
       >
         Save Expense
       </button>
@@ -67,7 +67,7 @@ export default {
         return this.expense.amount
       },
       set(amount) {
-        this.$store.commit('expenses/updateAmount', parseInt(amount))
+        this.$store.commit('expenses/updateAmount', parseFloat(amount))
       }
     },
     createdAt: {
