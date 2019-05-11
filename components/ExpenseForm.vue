@@ -1,5 +1,10 @@
 <template>
   <div id="expense-form">
+    <div v-if="errors.length">
+      <ul>
+        <li v-for="(error, idx) in errors" :key="idx">{{ error }}</li>
+      </ul>
+    </div>
     <form>
       <input
         id="description"
@@ -53,6 +58,11 @@ export default {
     Datepicker
   },
   props: ['expense'],
+  data() {
+    return {
+      errors: []
+    }
+  },
   computed: {
     description: {
       get() {
@@ -64,17 +74,19 @@ export default {
     },
     amount: {
       get() {
-        return this.expense.amount
+        return this.expense.amount !== 0 ? this.expense.amount : ''
       },
       set(amount) {
-        if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-          this.$store.commit('expenses/updateAmount', amount)
-        }
+        // if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+        this.$store.commit('expenses/updateAmount', amount)
+        // }
       }
     },
     createdAt: {
       get() {
-        return this.expense.createdAt
+        return this.expense.createdAt !== 0
+          ? this.expense.createdAt
+          : new Date()
       },
       set(createdAt) {
         this.$store.commit('expenses/updateCreatedAt', Date.parse(createdAt))
@@ -90,11 +102,27 @@ export default {
     }
   },
   created() {
-    this.$store.commit('expenses/setId', this.expense.id)
+    if (this.$route.params.id) {
+      this.$store.commit('expenses/setId', this.expense.id)
+    } else {
+      this.$store.commit('expenses/resetExpense')
+    }
   },
   methods: {
     handleSubmit() {
-      this.$emit('saveExpense')
+      this.errors = []
+      if (this.validateInputs()) {
+        this.$emit('saveExpense')
+      }
+    },
+    validateInputs() {
+      if (!this.description) {
+        this.errors.push('Description is required.')
+      }
+      if (!this.amount || !this.amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+        this.errors.push('Amount requires a valid number')
+      }
+      return !this.errors.length
     }
   }
 }
