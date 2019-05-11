@@ -1,7 +1,7 @@
 <template>
   <div id="alert-messages" class="alerts">
     <transition-group name="fade">
-      <div v-for="(message, idx) in messages" :key="idx">
+      <div v-for="(message, idx) in messages" :key="message">
         <div v-if="show" class="alert" :class="classObject">
           <span>{{ message }}</span>
           <span class="alert__btn-close" @click="closeMessage(idx)"
@@ -33,7 +33,6 @@ export default {
   },
   computed: {
     classObject() {
-      console.log('messageType', this.messageType)
       return {
         'alert--success': this.messageType.toLowerCase() === 'success',
         'alert--info': this.messageType.toLowerCase() === 'info',
@@ -62,6 +61,10 @@ export default {
   &__btn-close {
     cursor: pointer;
     transition: all 0.5s;
+
+    &:hover {
+      color: #eee;
+    }
   }
   &--success {
     background-color: lightgreen;

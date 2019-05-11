@@ -32,7 +32,7 @@
         rows="10"
       ></textarea>
       <button
-        class="f6 link dim ba bw1 ph3 pv2 mb2 dib dark-green"
+        class="f6 dim ba bw1 ph3 pv2 mb2 dib dark-green"
         @click.prevent="handleSubmit"
       >
         Save Expense
@@ -55,7 +55,12 @@ export default {
     Datepicker,
     Alert
   },
-  props: ['expense'],
+  props: {
+    expense: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
       errors: []
@@ -72,7 +77,9 @@ export default {
     },
     amount: {
       get() {
-        return this.expense.amount !== 0 ? this.expense.amount : ''
+        return this.expense.amount !== 0
+          ? (this.expense.amount / 100).toString()
+          : ''
       },
       set(amount) {
         // if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
