@@ -1,10 +1,6 @@
 <template>
   <div id="expense-form">
-    <div v-if="errors.length">
-      <ul>
-        <li v-for="(error, idx) in errors" :key="idx">{{ error }}</li>
-      </ul>
-    </div>
+    <Alert v-if="errors.length" :messages="errors" :message-type="'danger'" />
     <form>
       <input
         id="description"
@@ -52,10 +48,12 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
+import Alert from '@/components/Alert'
 
 export default {
   components: {
-    Datepicker
+    Datepicker,
+    Alert
   },
   props: ['expense'],
   data() {

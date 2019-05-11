@@ -1,11 +1,7 @@
 <template>
   <div id="signin-form" class="pa4">
     <form novalidate="true" class="measure center">
-      <div v-if="errors.length">
-        <ul>
-          <li v-for="(error, idx) in errors" :key="idx">{{ error }}</li>
-        </ul>
-      </div>
+      <Alert v-if="errors.length" :messages="errors" :message-type="'danger'" />
       <input
         id="email"
         v-model="email"
@@ -36,9 +32,13 @@
 
 <script>
 import { auth } from '@/services/firebase.js'
+import Alert from '@/components/Alert'
 
 export default {
   middleware: 'login-route',
+  components: {
+    Alert
+  },
   data() {
     return {
       email: null,
