@@ -66,11 +66,18 @@ export const mutations = {
 export const actions = {
   addExpense({ rootState, commit }, expense) {
     const uid = rootState.auth.user.uid
+    const updatedExpense = {
+      description: expense.description,
+      amount: parseFloat(expense.amount) * 100,
+      note: expense.note,
+      createdAt: expense.createdAt
+    }
     return database
       .ref(`users/${uid}/expenses`)
-      .push(expense)
+      .push(updatedExpense)
       .then(ref => {
         commit('addExpense', { id: ref.key, ...expense })
+        commit('resetExpense')
       })
       .catch(error => {
         alert('Add Expense Error: ', error.message)
@@ -97,7 +104,7 @@ export const actions = {
     const path = `users/${uid}/expenses/${expense.id}`
     const updatedExpense = {
       description: expense.description,
-      amount: expense.amount,
+      amount: parseFloat(expense.amount) * 100,
       note: expense.note,
       createdAt: expense.createdAt
     }
@@ -106,6 +113,7 @@ export const actions = {
       .update(updatedExpense)
       .then(() => {
         commit('updateExpense', expense)
+        commit('resetExpense')
       })
   },
   async setExpense({ state, commit }, id) {

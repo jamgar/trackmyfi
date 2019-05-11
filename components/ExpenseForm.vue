@@ -67,7 +67,9 @@ export default {
         return this.expense.amount
       },
       set(amount) {
-        this.$store.commit('expenses/updateAmount', parseFloat(amount))
+        if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+          this.$store.commit('expenses/updateAmount', amount)
+        }
       }
     },
     createdAt: {
