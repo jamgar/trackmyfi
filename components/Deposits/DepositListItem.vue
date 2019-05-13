@@ -4,24 +4,29 @@
     :to="path"
   >
     <div class="dtc">
-      <div>{{ expense.description }}</div>
+      <div>{{ deposit.description }}</div>
       <span class="f6 fw4 gray">{{ formattedDate }}</span>
     </div>
-    <div class="dtc tr v-mid">${{ expense.amount }}</div>
+    <div class="dtc tr v-mid">{{ formattedAmount }}</div>
   </nuxt-link>
 </template>
 
 <script>
 import moment from 'moment'
+import dinero from 'dinero.js'
 
 export default {
-  props: ['expense'],
+  props: ['deposit'],
   computed: {
     formattedDate() {
-      return moment(this.expense.createdAt).format('MMMM Do, YYYY')
+      return moment(this.deposit.createdAt).format('MMMM Do, YYYY')
+    },
+    formattedAmount() {
+      const amount = this.deposit.amount ? this.deposit.amount : 0
+      return dinero({ amount: parseInt(amount) }).toFormat('$0,0.00')
     },
     path() {
-      return `/expenses/${this.expense.id}`
+      return `/deposits/${this.deposit.id}`
     }
   }
 }

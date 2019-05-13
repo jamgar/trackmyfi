@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ExpenseListItem from '@/components/ExpenseListItem.vue'
+import ExpenseListItem from '@/components/Expenses/ExpenseListItem.vue'
 
 export default {
   components: {

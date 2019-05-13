@@ -2564,6 +2564,10 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
+dinero.js@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/dinero.js/-/dinero.js-1.6.0.tgz#d1e4fc4c1784cd8a853c2f1f1b1bb765736ec709"
+
 doctrine@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"

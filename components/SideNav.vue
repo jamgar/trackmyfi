@@ -4,7 +4,7 @@
     <div v-if="isAuthenticated">
       <nuxt-link to="/dashboard">Dashboard</nuxt-link>
       <nuxt-link to="/expenses">Expenses</nuxt-link>
-      <nuxt-link to="/dashboard">Deposits</nuxt-link>
+      <nuxt-link to="/deposits">Deposits</nuxt-link>
       <a href="#" @click="signout">Sign Out</a>
     </div>
     <div v-else>

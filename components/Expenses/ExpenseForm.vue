@@ -77,14 +77,10 @@ export default {
     },
     amount: {
       get() {
-        return this.expense.amount !== 0
-          ? (this.expense.amount / 100).toString()
-          : ''
+        return this.expense.amount ? (this.expense.amount / 100).toString() : ''
       },
       set(amount) {
-        // if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-        this.$store.commit('expenses/updateAmount', amount)
-        // }
+        this.$store.commit('expenses/updateAmount', parseFloat(amount) * 100)
       }
     },
     createdAt: {

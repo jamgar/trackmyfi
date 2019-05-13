@@ -16,7 +16,8 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-
+  layoutTransition: 'layout',
+  transition: 'page',
   /*
    ** Customize the progress-bar color
    */
@@ -25,7 +26,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['tachyons/css/tachyons.css'],
+  css: ['tachyons/css/tachyons.css', '~/assets/css/main.css'],
 
   /*
    ** Plugins to load before mounting the App

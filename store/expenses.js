@@ -68,7 +68,7 @@ export const actions = {
     const uid = rootState.auth.user.uid
     const updatedExpense = {
       description: expense.description,
-      amount: parseFloat(expense.amount) * 100,
+      amount: expense.amount,
       note: expense.note,
       createdAt: expense.createdAt
     }
@@ -104,7 +104,7 @@ export const actions = {
     const path = `users/${uid}/expenses/${expense.id}`
     const updatedExpense = {
       description: expense.description,
-      amount: parseFloat(expense.amount) * 100,
+      amount: expense.amount,
       note: expense.note,
       createdAt: expense.createdAt
     }

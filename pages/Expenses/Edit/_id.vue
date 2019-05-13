@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ExpenseForm from '@/components/ExpenseForm.vue'
+import ExpenseForm from '@/components/Expenses/ExpenseForm.vue'
 
 export default {
   components: {
