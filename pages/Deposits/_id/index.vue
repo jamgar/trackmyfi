@@ -32,11 +32,12 @@
 import moment from 'moment'
 
 export default {
+  layout: 'protected',
   computed: {
     formattedDate() {
       return moment(this.deposit.createdAt).format('MMMM Do, YYYY')
     },
-    expense() {
+    deposit() {
       return this.$store.state.deposits.deposit
     },
     path() {

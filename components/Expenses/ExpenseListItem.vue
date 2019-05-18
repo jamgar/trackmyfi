@@ -7,7 +7,7 @@
       <div>{{ expense.description }}</div>
       <span class="f6 fw4 gray">{{ formattedDate }}</span>
     </div>
-    <div class="dtc tr v-mid">{{ formattedAmount }}</div>
+    <div class="dtc tr v-mid light-red">{{ formattedAmount }}</div>
   </nuxt-link>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     },
     formattedAmount() {
       const amount = this.expense.amount ? this.expense.amount : 0
-      return dinero({ amount: parseInt(amount) }).toFormat('$0,0.00')
+      return '-' + dinero({ amount: parseInt(amount) }).toFormat('$0,0.00')
     },
     path() {
       return `/expenses/${this.expense.id}`

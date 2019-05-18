@@ -13,6 +13,7 @@
 import ExpenseForm from '@/components/Expenses/ExpenseForm.vue'
 
 export default {
+  layout: 'protected',
   components: {
     ExpenseForm
   },

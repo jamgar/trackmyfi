@@ -77,7 +77,7 @@ export default {
     },
     amount: {
       get() {
-        return this.deposit.amount ? (this.expense.amount / 100).toString() : ''
+        return this.deposit.amount ? (this.deposit.amount / 100).toString() : ''
       },
       set(amount) {
         this.$store.commit('deposits/updateAmount', parseFloat(amount) * 100)

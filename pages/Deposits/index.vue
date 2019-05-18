@@ -18,6 +18,7 @@
 import DepositList from '@/components/Deposits/DepositList.vue'
 
 export default {
+  layout: 'protected',
   components: {
     DepositList
   }

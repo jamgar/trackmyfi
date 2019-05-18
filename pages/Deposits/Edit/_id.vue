@@ -13,6 +13,7 @@
 import DepositForm from '@/components/Deposits/DepositForm'
 
 export default {
+  layout: 'protected',
   components: {
     DepositForm
   },

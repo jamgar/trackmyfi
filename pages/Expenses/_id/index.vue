@@ -32,6 +32,7 @@
 import moment from 'moment'
 
 export default {
+  layout: 'protected',
   computed: {
     formattedDate() {
       return moment(this.expense.createdAt).format('MMMM Do, YYYY')

@@ -18,6 +18,7 @@
 import ExpenseList from '@/components/Expenses/ExpenseList.vue'
 
 export default {
+  layout: 'protected',
   components: {
     ExpenseList
   }
