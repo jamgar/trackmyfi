@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ph4 pv3 bg-dark-gray flex justify-between">
-      <nuxt-link class="b f2 link white hover-moon-gray" to="/"
+      <nuxt-link class="b f2 link near-white hover-moon-gray" to="/"
         >Track My Fi</nuxt-link
       >
       <span class="white" style="font-size:30px;cursor:pointer" @click="openNav"
