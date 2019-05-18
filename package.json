@@ -14,12 +14,14 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "chart.js": "^2.8.0",
     "cross-env": "^5.2.0",
     "dinero.js": "^1.6.0",
     "firebase": "^5.10.0",
     "moment": "^2.24.0",
     "nuxt": "2.5.0",
     "tachyons": "^4.11.1",
+    "vue-chartjs": "^3.4.2",
     "vue-charts": "^0.2.1",
     "vuejs-datepicker": "^1.5.4",
     "vuex-persist": "^2.0.0"
