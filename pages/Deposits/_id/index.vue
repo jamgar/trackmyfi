@@ -8,7 +8,7 @@
           <div>{{ deposit.description }}</div>
           <span class="f6 fw4 gray">Date: {{ formattedDate }}</span>
         </div>
-        <div class="dtc tr v-mid">Amount ${{ deposit.amount }}</div>
+        <div class="dtc tr v-mid">Amount {{ formattedAmount }}</div>
       </div>
       <div class="f4 bb bl br b--moon-gray mv0 pa3 dt w-100">
         <p>{{ deposit.note }}</p>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import dinero from 'dinero.js'
 import moment from 'moment'
 
 export default {
@@ -36,6 +37,10 @@ export default {
   computed: {
     formattedDate() {
       return moment(this.deposit.createdAt).format('MMMM Do, YYYY')
+    },
+    formattedAmount() {
+      const amount = this.deposit.amount ? this.deposit.amount : 0
+      return dinero({ amount: parseInt(amount) }).toFormat('$0,0.00')
     },
     deposit() {
       return this.$store.state.deposits.deposit
