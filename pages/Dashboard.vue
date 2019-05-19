@@ -25,7 +25,7 @@
 
 <script>
 import dinero from 'dinero.js'
-import { balance } from '@/utils'
+import { balance, monthlyTotal } from '@/utils'
 import BarChart from '@/components/Charts/BarChart'
 
 export default {
@@ -64,6 +64,11 @@ export default {
   },
   methods: {
     fillData() {
+      const expenses = this.$store.state.expenses.expenses
+      const deposits = this.$store.state.deposits.deposits
+      const expenseTotals = this.getMonthlyTotals(expenses)
+      const depositTotals = this.getMonthlyTotals(deposits)
+
       this.barDataCollection = {
         labels: [
           'JAN',
@@ -83,17 +88,37 @@ export default {
           {
             label: 'Deposits',
             backgroundColor: '#A5CC82',
-            data: [1200, 1234, 1455, 1266]
+            data: depositTotals
           },
           {
             label: 'Expenses',
             backgroundColor: '#F87979',
-            data: [980, 453, 1002, 890]
+            data: expenseTotals
           }
         ]
       }
     },
-    getMonthlyTotal() {}
+    getMonthlyTotals(data) {
+      const months = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '10',
+        '11',
+        '12'
+      ]
+      const year = new Date().getFullYear()
+
+      return months.map(month => {
+        return monthlyTotal(data, month, year) / 100
+      })
+    }
   }
 }
 </script>
