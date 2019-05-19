@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SideNav from '@/components/SideNav.vue'
+import SideNav from '@/components/Shared/SideNav.vue'
 
 export default {
   components: {

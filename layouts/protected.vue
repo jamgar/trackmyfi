@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '@/components/Shared/Navbar.vue'
 
 export default {
   middleware: 'authenticated',

@@ -92,7 +92,8 @@ export default {
           }
         ]
       }
-    }
+    },
+    getMonthlyTotal() {}
   }
 }
 </script>

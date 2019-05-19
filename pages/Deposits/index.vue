@@ -9,17 +9,20 @@
         to="/deposits/new"
         >Add Deposit</nuxt-link
       >
+      <ListFilters />
       <DepositList />
     </div>
   </div>
 </template>
 
 <script>
+import ListFilters from '@/components/Shared/ListFilters'
 import DepositList from '@/components/Deposits/DepositList.vue'
 
 export default {
   layout: 'protected',
   components: {
+    ListFilters,
     DepositList
   }
 }
