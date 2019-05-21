@@ -11,7 +11,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    textFilter: {
+      get() {
+        return this.$store.state.listFilters.text
+      },
+      set(textFilter) {
+        this.$store.commit('listFilters/updateText', textFilter)
+      }
+    }
+  },
+  mounted() {
+    this.$store.commit('listFilters/resetDefaults')
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

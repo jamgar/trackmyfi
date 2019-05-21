@@ -4,8 +4,8 @@
       <div class="dtc">Deposit</div>
       <div class="dtc tr">Amount</div>
     </div>
-    <div v-if="deposits.length > 0">
-      <div v-for="(deposit, idx) in deposits" :key="idx">
+    <div v-if="filteredDeposits.length > 0">
+      <div v-for="(deposit, idx) in filteredDeposits" :key="idx">
         <DepositListItem :deposit="deposit" />
       </div>
     </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { filterLists } from '@/utils'
 import DepositListItem from '@/components/Deposits/DepositListItem.vue'
 
 export default {
@@ -21,8 +22,10 @@ export default {
     DepositListItem
   },
   computed: {
-    deposits() {
-      return this.$store.state.deposits.deposits
+    filteredDeposits() {
+      const deposits = this.$store.state.deposits.deposits
+      const filters = this.$store.state.listFilters
+      return filterLists(deposits, filters)
     }
   }
 }

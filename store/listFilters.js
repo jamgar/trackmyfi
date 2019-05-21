@@ -6,7 +6,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setText(state, payload) {
+  updateText(state, payload) {
     state.text = payload
   },
   resetDefaults(state) {
