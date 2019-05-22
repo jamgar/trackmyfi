@@ -22,6 +22,9 @@ export default {
       return this.$store.state.expenses.expense
     }
   },
+  mounted() {
+    this.$store.dispatch('expenses/resetExpense')
+  },
   methods: {
     saveExpense() {
       this.$store

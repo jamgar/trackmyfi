@@ -4,8 +4,8 @@
       <div class="dtc">Expense</div>
       <div class="dtc tr">Amount</div>
     </div>
-    <div v-if="expenses.length > 0">
-      <div v-for="(expense, idx) in expenses" :key="idx">
+    <div v-if="filteredExpenses.length > 0">
+      <div v-for="(expense, idx) in filteredExpenses" :key="idx">
         <ExpenseListItem :expense="expense" />
       </div>
     </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { filterLists } from '@/utils'
 import ExpenseListItem from '@/components/Expenses/ExpenseListItem.vue'
 
 export default {
@@ -21,8 +22,10 @@ export default {
     ExpenseListItem
   },
   computed: {
-    expenses() {
-      return this.$store.state.expenses.expenses
+    filteredExpenses() {
+      const expenses = this.$store.state.expenses.expenses
+      const filters = this.$store.state.listFilters
+      return filterLists(expenses, filters)
     }
   }
 }

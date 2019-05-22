@@ -22,6 +22,9 @@ export default {
       return this.$store.state.deposits.deposit
     }
   },
+  mounted() {
+    this.$store.dispatch('deposits/resetDeposit')
+  },
   methods: {
     saveDeposit() {
       this.$store

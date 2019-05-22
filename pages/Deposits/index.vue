@@ -9,7 +9,7 @@
         to="/deposits/new"
         >Add Deposit</nuxt-link
       >
-      <ListFilters />
+      <ListFilters placeholder="Search Deposits" />
       <DepositList />
     </div>
   </div>

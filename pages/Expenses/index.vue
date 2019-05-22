@@ -9,17 +9,20 @@
         to="/expenses/new"
         >Add Expense</nuxt-link
       >
+      <ListFilters placeholder="Search Expenses" />
       <ExpenseList />
     </div>
   </div>
 </template>
 
 <script>
+import ListFilters from '@/components/Shared/ListFilters'
 import ExpenseList from '@/components/Expenses/ExpenseList.vue'
 
 export default {
   layout: 'protected',
   components: {
+    ListFilters,
     ExpenseList
   }
 }

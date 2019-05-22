@@ -85,12 +85,11 @@ export default {
     },
     createdAt: {
       get() {
-        return this.deposit.createdAt !== 0
-          ? this.deposit.createdAt
-          : new Date()
+        return this.deposit.createdAt
       },
       set(createdAt) {
-        this.$store.commit('deposits/updateCreatedAt', Date.parse(createdAt))
+        const depositDate = createdAt !== 0 ? Date.parse(createdAt) : Date.now()
+        this.$store.commit('deposits/updateCreatedAt', depositDate)
       }
     },
     note: {
@@ -104,7 +103,7 @@ export default {
   },
   created() {
     if (this.$route.params.id) {
-      this.$store.commit('deposits/setId', this.expense.id)
+      this.$store.commit('deposits/setId', this.deposit.id)
     } else {
       this.$store.commit('deposits/resetDeposit')
     }
@@ -121,7 +120,10 @@ export default {
         this.errors.push('Description is required.')
       }
       if (!this.amount || !this.amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-        this.errors.push('Amount requires a valid number')
+        this.errors.push('Amount requires a valid number.')
+      }
+      if (this.createdAt === 0) {
+        this.errors.push('Date is required.')
       }
       return !this.errors.length
     }
