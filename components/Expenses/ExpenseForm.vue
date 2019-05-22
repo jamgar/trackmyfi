@@ -48,7 +48,7 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import Alert from '@/components/Alert'
+import Alert from '@/components/Shared/Alert'
 
 export default {
   components: {

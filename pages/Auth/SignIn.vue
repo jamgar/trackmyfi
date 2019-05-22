@@ -32,7 +32,7 @@
 
 <script>
 import { auth } from '@/services/firebase.js'
-import Alert from '@/components/Alert'
+import Alert from '@/components/Shared/Alert'
 
 export default {
   middleware: 'login-route',
