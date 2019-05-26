@@ -4,7 +4,7 @@
       <h1 class="fw4 tc">Edit Deposit</h1>
     </div>
     <div class="ph4 ph5-m ph7-l">
-      <DepositForm :deposit="deposit" @saveDeposit="saveDeposit" />
+      <DepositForm @saveDeposit="saveDeposit" />
     </div>
   </div>
 </template>
@@ -18,9 +18,6 @@ export default {
     DepositForm
   },
   computed: {
-    deposit() {
-      return this.$store.state.deposits.deposit
-    },
     path() {
       return `/deposits/edit/${this.$route.params.id}`
     }

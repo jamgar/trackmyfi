@@ -4,7 +4,7 @@
       <h1 class="fw4 tc">Add Deposit</h1>
     </div>
     <div class="ph4 ph5-m ph7-l">
-      <DepositForm :deposit="deposit" @saveDeposit="saveDeposit" />
+      <DepositForm @saveDeposit="saveDeposit" />
     </div>
   </div>
 </template>
@@ -16,11 +16,6 @@ export default {
   layout: 'protected',
   components: {
     DepositForm
-  },
-  computed: {
-    deposit() {
-      return this.$store.state.deposits.deposit
-    }
   },
   mounted() {
     this.$store.dispatch('deposits/resetDeposit')

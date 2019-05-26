@@ -9,6 +9,17 @@
         type="text"
         placeholder="Description"
       />
+      <select
+        id="category"
+        v-model="category"
+        name="category"
+        class="f4 pa2 input-reset ba mb3 w-100 b--moon-gray"
+      >
+        <option value disabled selected>Category</option>
+        <option v-for="(item, idx) in categories" :key="item" :value="idx">
+          {{ item }}
+        </option>
+      </select>
       <input
         id="amount"
         v-model="amount"
@@ -55,12 +66,6 @@ export default {
     Datepicker,
     Alert
   },
-  props: {
-    deposit: {
-      type: Object,
-      default: null
-    }
-  },
   data() {
     return {
       errors: []
@@ -69,15 +74,25 @@ export default {
   computed: {
     description: {
       get() {
-        return this.deposit.description
+        return this.$store.state.deposits.deposit.description
       },
       set(description) {
         this.$store.commit('deposits/updateDescription', description)
       }
     },
+    category: {
+      get() {
+        return this.$store.state.deposits.deposit.category
+      },
+      set(category) {
+        this.$store.commit('deposits/updateCategory', category)
+      }
+    },
     amount: {
       get() {
-        return this.deposit.amount ? (this.deposit.amount / 100).toString() : ''
+        return this.$store.state.deposits.deposit.amount
+          ? (this.$store.state.deposits.deposit.amount / 100).toString()
+          : ''
       },
       set(amount) {
         this.$store.commit('deposits/updateAmount', parseFloat(amount) * 100)
@@ -85,7 +100,7 @@ export default {
     },
     createdAt: {
       get() {
-        return this.deposit.createdAt
+        return this.$store.state.deposits.deposit.createdAt
       },
       set(createdAt) {
         const depositDate = createdAt !== 0 ? Date.parse(createdAt) : Date.now()
@@ -94,16 +109,19 @@ export default {
     },
     note: {
       get() {
-        return this.deposit.note
+        return this.$store.state.deposits.deposit.note
       },
       set(note) {
         this.$store.commit('deposits/updateNote', note)
       }
+    },
+    categories() {
+      return this.$store.state.deposits.categories
     }
   },
   created() {
     if (this.$route.params.id) {
-      this.$store.commit('deposits/setId', this.deposit.id)
+      this.$store.commit('deposits/setId', this.$route.params.id)
     } else {
       this.$store.commit('deposits/resetDeposit')
     }
@@ -118,6 +136,9 @@ export default {
     validateInputs() {
       if (!this.description) {
         this.errors.push('Description is required.')
+      }
+      if (this.category < 0 || !this.category) {
+        this.errors.push('Category is required')
       }
       if (!this.amount || !this.amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
         this.errors.push('Amount requires a valid number.')
