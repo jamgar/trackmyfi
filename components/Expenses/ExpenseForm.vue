@@ -9,6 +9,17 @@
         type="text"
         placeholder="Description"
       />
+      <select
+        id="category"
+        v-model="category"
+        name="category"
+        class="f4 pa2 input-reset ba mb3 w-100 b--moon-gray"
+      >
+        <option value disabled selected>Category</option>
+        <option v-for="(item, idx) in categories" :key="item" :value="idx">{{
+          item
+        }}</option>
+      </select>
       <input
         id="amount"
         v-model="amount"
@@ -55,12 +66,6 @@ export default {
     Datepicker,
     Alert
   },
-  props: {
-    expense: {
-      type: Object,
-      default: null
-    }
-  },
   data() {
     return {
       errors: []
@@ -69,15 +74,25 @@ export default {
   computed: {
     description: {
       get() {
-        return this.expense.description
+        return this.$store.state.expenses.expense.description
       },
       set(description) {
         this.$store.commit('expenses/updateDescription', description)
       }
     },
+    category: {
+      get() {
+        return this.$store.state.expenses.expense.category
+      },
+      set(category) {
+        this.$store.commit('expenses/updateCategory', category)
+      }
+    },
     amount: {
       get() {
-        return this.expense.amount ? (this.expense.amount / 100).toString() : ''
+        return this.$store.state.expenses.expense.amount
+          ? (this.$store.state.expenses.expense.amount / 100).toString()
+          : ''
       },
       set(amount) {
         this.$store.commit('expenses/updateAmount', parseFloat(amount) * 100)
@@ -85,7 +100,7 @@ export default {
     },
     createdAt: {
       get() {
-        return this.expense.createdAt
+        return this.$store.state.expenses.expense.createdAt
       },
       set(createdAt) {
         const expenseDate = createdAt !== 0 ? Date.parse(createdAt) : Date.now()
@@ -94,16 +109,19 @@ export default {
     },
     note: {
       get() {
-        return this.expense.note
+        return this.$store.state.expenses.expense.note
       },
       set(note) {
         this.$store.commit('expenses/updateNote', note)
       }
+    },
+    categories() {
+      return this.$store.state.expenses.categories
     }
   },
   created() {
     if (this.$route.params.id) {
-      this.$store.commit('expenses/setId', this.expense.id)
+      this.$store.commit('expenses/setId', this.$route.params.id)
     } else {
       this.$store.commit('expenses/resetExpense')
     }
@@ -118,6 +136,9 @@ export default {
     validateInputs() {
       if (!this.description) {
         this.errors.push('Description is required.')
+      }
+      if (this.category < 0 || !this.category) {
+        this.errors.push('Category is required')
       }
       if (!this.amount || !this.amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
         this.errors.push('Amount requires a valid number')

@@ -4,7 +4,7 @@
       <h1 class="fw4 tc">Add Expense</h1>
     </div>
     <div class="ph4 ph5-m ph7-l">
-      <ExpenseForm :expense="expense" @saveExpense="saveExpense" />
+      <ExpenseForm @saveExpense="saveExpense" />
     </div>
   </div>
 </template>
@@ -16,11 +16,6 @@ export default {
   layout: 'protected',
   components: {
     ExpenseForm
-  },
-  computed: {
-    expense() {
-      return this.$store.state.expenses.expense
-    }
   },
   mounted() {
     this.$store.dispatch('expenses/resetExpense')

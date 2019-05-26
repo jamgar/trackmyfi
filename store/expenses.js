@@ -7,8 +7,19 @@ export const state = () => ({
     description: '',
     amount: 0,
     note: '',
-    createdAt: 0
-  }
+    createdAt: 0,
+    category: ''
+  },
+  categories: [
+    'Home',
+    'Auto',
+    'Entertainment',
+    'Food',
+    'Clothes',
+    'Gas',
+    'Travel',
+    'Other'
+  ]
 })
 
 export const mutations = {
@@ -18,7 +29,8 @@ export const mutations = {
       description: expense.description,
       amount: expense.amount,
       note: expense.note,
-      createdAt: expense.createdAt
+      createdAt: expense.createdAt,
+      category: expense.category
     })
   },
   updateExpense(state, payload) {
@@ -36,7 +48,8 @@ export const mutations = {
       description: '',
       amount: 0,
       note: '',
-      createdAt: 0
+      createdAt: 0,
+      category: ''
     }
   },
   deleteExpense(state, id) {
@@ -51,6 +64,9 @@ export const mutations = {
   },
   updateDescription(state, description) {
     state.expense.description = description
+  },
+  updateCategory(state, category) {
+    state.expense.category = category
   },
   updateAmount(state, amount) {
     state.expense.amount = amount
@@ -70,7 +86,8 @@ export const actions = {
       description: expense.description,
       amount: expense.amount,
       note: expense.note,
-      createdAt: expense.createdAt
+      createdAt: expense.createdAt,
+      category: expense.category
     }
     return database
       .ref(`users/${uid}/expenses`)
@@ -106,7 +123,8 @@ export const actions = {
       description: expense.description,
       amount: expense.amount,
       note: expense.note,
-      createdAt: expense.createdAt
+      createdAt: expense.createdAt,
+      category: expense.category
     }
     return database
       .ref(path)

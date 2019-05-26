@@ -4,7 +4,7 @@
       <h1 class="fw4 tc">Edit Expense</h1>
     </div>
     <div class="ph4 ph5-m ph7-l">
-      <ExpenseForm :expense="expense" @saveExpense="saveExpense" />
+      <ExpenseForm @saveExpense="saveExpense" />
     </div>
   </div>
 </template>
@@ -17,9 +17,6 @@ export default {
     ExpenseForm
   },
   computed: {
-    expense() {
-      return this.$store.state.expenses.expense
-    },
     path() {
       return `/expenses/edit/${this.$route.params.id}`
     }
