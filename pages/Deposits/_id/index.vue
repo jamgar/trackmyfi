@@ -5,10 +5,15 @@
         class="f4 fw6 mid-gray ba b--moon-gray bg-light-gray mv0 pa3 dt w-100"
       >
         <div class="dtc">
-          <div>{{ deposit.description }}</div>
-          <span class="f6 fw4 gray">Date: {{ formattedDate }}</span>
+          <div class="pb1">{{ deposit.description }}</div>
+          <div class="f6 fw4 gray">Date: {{ formattedDate }}</div>
         </div>
-        <div class="dtc tr v-mid">Amount {{ formattedAmount }}</div>
+        <div class="dtc">
+          <div class="tr pb1">Amount {{ formattedAmount }}</div>
+          <div class="tr f6 fw4 gray">
+            Category: {{ categories[deposit.category] }}
+          </div>
+        </div>
       </div>
       <div class="f4 bb bl br b--moon-gray mv0 pa3 dt w-100">
         <p>{{ deposit.note }}</p>
@@ -47,6 +52,9 @@ export default {
     },
     path() {
       return `/deposits/edit/${this.$route.params.id}`
+    },
+    categories() {
+      return this.$store.state.deposits.categories
     }
   },
   fetch({ params, store }) {
