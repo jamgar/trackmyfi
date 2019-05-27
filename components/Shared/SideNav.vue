@@ -9,7 +9,7 @@
     </div>
     <div v-else>
       <nuxt-link to="/auth/signin">Sign In</nuxt-link>
-      <a href="#">Sign Up</a>
+      <a href="/auth/signup">Sign Up</a>
     </div>
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
     },
     async signout() {
       await this.$store.dispatch('auth/signOut')
+      window.localStorage.removeItem('vuex-track-my-fi')
       this.$router.push('/')
     }
   }

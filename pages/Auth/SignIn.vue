@@ -25,7 +25,6 @@
       <nuxt-link class="f6 link dim ba bw1 ph3 pv2 mb2 dib mid-gray" to="/"
         >Cancel</nuxt-link
       >
-      <p>Sign Up</p>
     </form>
   </div>
 </template>

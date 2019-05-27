@@ -6,31 +6,33 @@
         <span :class="colorText">{{ formattedBalance }}</span>
       </h1>
     </div>
-    <div class="ph4 ph5-m ph6-l">
-      <div class="center hidden br2 ba mv4 b--black-10 shadow-5">
-        <h1 class="f4 bg-dark-gray near-white mv0 pv2 ph3 br2 br--top">
-          Month Deposits
-        </h1>
-        <div class="pa3 bt">
-          <PieChart
-            class="f6 f5-ns lh-copy mv0"
-            :chart-data="depositPieDataCollection"
-            :options="options"
-          />
+    <div class="flex">
+      <div class="w-50 pa2">
+        <div class="center hidden br2 ba mv4 b--black-10 shadow-5">
+          <h1 class="f4 bg-dark-gray near-white mv0 pv2 ph3 br2 br--top">
+            Month Deposits
+          </h1>
+          <div class="pa3 bt">
+            <PieChart
+              class="f6 f5-ns lh-copy mv0"
+              :chart-data="depositPieDataCollection"
+              :options="options"
+            />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ph4 ph5-m ph6-l">
-      <div class="center hidden br2 ba mv4 b--black-10 shadow-5">
-        <h1 class="f4 bg-dark-gray near-white mv0 pv2 ph3 br2 br--top">
-          Month Expenses
-        </h1>
-        <div class="pa3 bt">
-          <PieChart
-            class="f6 f5-ns lh-copy mv0"
-            :chart-data="expensePieDataCollection"
-            :options="options"
-          />
+      <div class="w-50 pa2">
+        <div class="center hidden br2 ba mv4 b--black-10 shadow-5">
+          <h1 class="f4 bg-dark-gray near-white mv0 pv2 ph3 br2 br--top">
+            Month Expenses
+          </h1>
+          <div class="pa3 bt">
+            <PieChart
+              class="f6 f5-ns lh-copy mv0"
+              :chart-data="expensePieDataCollection"
+              :options="options"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -89,9 +91,11 @@ export default {
       return balance(expenses, deposits)
     }
   },
+  fetch({ store }) {
+    store.dispatch('expenses/getExpenses')
+    store.dispatch('deposits/getDeposits')
+  },
   mounted() {
-    this.$store.dispatch('expenses/getExpenses')
-    this.$store.dispatch('deposits/getDeposits')
     this.fillData()
   },
   methods: {
