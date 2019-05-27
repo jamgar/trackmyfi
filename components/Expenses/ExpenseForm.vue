@@ -16,9 +16,12 @@
         class="f4 pa2 input-reset ba mb3 w-100 b--moon-gray"
       >
         <option value disabled selected>Category</option>
-        <option v-for="(item, idx) in categories" :key="item" :value="idx">{{
-          item
-        }}</option>
+        <option
+          v-for="(item, idx) in categories"
+          :key="item.label"
+          :value="idx"
+          >{{ item.label }}</option
+        >
       </select>
       <input
         id="amount"

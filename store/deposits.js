@@ -10,7 +10,11 @@ export const state = () => ({
     createdAt: 0,
     category: ''
   },
-  categories: ['Employment', 'Investment', 'Other']
+  categories: [
+    { label: 'Employment', color: '#3C91E6' },
+    { label: 'Investment', color: '#A7CCED' },
+    { label: 'Other', color: '#818D92' }
+  ]
 })
 
 export const mutations = {

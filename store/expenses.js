@@ -11,14 +11,14 @@ export const state = () => ({
     category: ''
   },
   categories: [
-    'Home',
-    'Auto',
-    'Entertainment',
-    'Food',
-    'Clothes',
-    'Gas',
-    'Travel',
-    'Other'
+    { label: 'Home', color: '#3C91E6' },
+    { label: 'Auto', color: '#CACFD6' },
+    { label: 'Entertainment', color: '#A6EBC9' },
+    { label: 'Food', color: '#A7CCED' },
+    { label: 'Clothes', color: '#FA824C' },
+    { label: 'Gas', color: '#805E73' },
+    { label: 'Travel', color: '#6320EE' },
+    { label: 'Other', color: '#818D92' }
   ]
 })
 

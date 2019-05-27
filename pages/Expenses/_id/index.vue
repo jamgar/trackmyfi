@@ -11,7 +11,7 @@
         <div class="dtc">
           <div class="tr pb1">Amount {{ formattedAmount }}</div>
           <div class="tr f6 fw4 gray">
-            Category: {{ categories[expense.category] }}
+            Category: {{ categories[expense.category].label }}
           </div>
         </div>
       </div>
